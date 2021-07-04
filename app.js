@@ -14,6 +14,8 @@ app.use(express.static(`${__dirname}/views`));
 
 //routes
 app.use("/api/auth", require("./routes/auth"));
+app.use("/api/problem", require("./routes/problem"));
+
 app.get("/login", (req, res) => {
   res.render("login");
 });

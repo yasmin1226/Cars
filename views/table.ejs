@@ -253,7 +253,61 @@
       </footer>
     </div>
   
-  
+    <script>
+      const axios=require('axios');
+      const getAllProblem=async()=>{
+
+        const problems = await axios.get('http://localhost:7000/api/problem');
+        console.log(problems);
+      }
+      getAllProblem()
+      const form = document.getElementById("login-form");
+
+      // form.addEventListener("submit", (e) => {
+      //   e.preventDefault();
+      //   const username = e.target.elements.username.value;
+      //   const password = e.target.elements.password.value;
+
+      //   console.log(username);
+      //   var myHeaders = new Headers();
+      //   myHeaders.append("Content-Type", "application/json");
+
+      //   var raw = JSON.stringify({
+      //     username,
+      //     password,
+      //   });
+
+      //   var requestOptions = {
+      //     method: "POST",
+      //     headers: myHeaders,
+      //     body: raw,
+      //     redirect: "follow",
+      //   };
+
+      //   fetch("http://localhost:7000/api/auth", requestOptions)
+      //     .then((response) => response.text())
+      //     .then((result) => {
+      //       const res = JSON.parse(result);
+      //       console.log(res.msg);
+      //       if (res.msg === "Admin logged in successfully") {
+      //         alert(res.msg);
+      //         console.log("sucess");
+      //         window.location.href = "http://localhost:7000/table";
+      //       } else {
+      //         console.log("fail");
+
+      //         alert("fail");
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       console.log("error", error);
+      //       alert(error.msg);
+      //     });
+
+      //   console.log(e.target);
+      // }
+      // );
+      </script>
   <!--   Core JS Files   -->
   <script src="../assets/js/core/jquery.min.js"></script> <!-- the top icons -->
   <script src="../assets/js/core/popper.min.js"></script> 
