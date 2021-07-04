@@ -6,8 +6,8 @@ const ProblemSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    file: {
-      type: String,
+    problemFile: {
+      // type: File,
       // required: true,
     },
   },

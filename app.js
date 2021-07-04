@@ -11,6 +11,8 @@ app.use(express.json());
 //
 
 app.use(express.static(`${__dirname}/views`));
+app.use(express.static(`${__dirname}/assets`));
+app.use(express.static(`${__dirname}/uploads`));
 
 //routes
 app.use("/api/auth", require("./routes/auth"));
@@ -21,6 +23,9 @@ app.get("/login", (req, res) => {
 });
 app.get("/table", (req, res) => {
   res.render("table");
+});
+app.get("/addproblem", (req, res) => {
+  res.render("addProblem");
 });
 
 module.exports = app;

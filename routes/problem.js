@@ -1,6 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const Problem = require("../models/Problem");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+const uploadStorage = multer({ storage: storage });
 router.get("/", async (req, res) => {
   try {
     const problems = await Problem.find();
@@ -23,9 +34,11 @@ router.get("/:id", async (req, res) => {
     res.status(400).json({ err: err.message });
   }
 });
-router.post("/", async (req, res) => {
+router.post("/", uploadStorage.single("file"), async (req, res) => {
   try {
-    const problem = await Problem.create(req.body);
+    console.log("req.file", req.file);
+    const data = { problemFile: req.file, problem: req.body.problem };
+    const problem = await Problem.create(data);
     res.status(200).json(problem);
   } catch (err) {
     console.log("err", err);
