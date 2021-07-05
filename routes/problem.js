@@ -28,6 +28,7 @@ router.get("/:id", async (req, res) => {
       throw Error("that problem not exist");
     } else {
       res.status(200).json(problem);
+      // res.render("EditProblem.ejs", { problem: problem });
     }
   } catch (err) {
     console.log("err", err);

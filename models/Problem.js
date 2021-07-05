@@ -4,7 +4,7 @@ const ProblemSchema = new mongoose.Schema(
   {
     problem: {
       type: String,
-      required: true,
+      // required: true,
     },
     problemFile: {
       // type: File,
