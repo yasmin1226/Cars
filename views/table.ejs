@@ -113,42 +113,7 @@
                     </table>
                     <button style=" margin-left: 400px; background-color: blue; color: cornsilk; border-radius: 10px; padding: 5px;">Add Problem</button>
                   </div>
-                  <form
-                  id="login-form"
-                  class="login-form validate-form p-b-33 p-t-5"
-                >
-                  <div
-                    class="input-position validate-input"
-                    data-validate="Enter Probem Name"
-                  >
-                    <input
-                      class="input100"
-                      type="text"
-                      name="problem"
-                      placeholder="problem name"
-                      required
-                      id="pEdit"
-                    />
-                    <span class="input-logo" data-placeholder="&#xe82a;"></span>
-                  </div>
-        
-                  <div class="input-position validate-input" data-validate="File">
-                    <input
-                      class="input100"
-                      type="file"
-                      name="file"
-                      placeholder="problem file"
-                      required
-                      id="fEdit"
-                     
-                    />
-                    <span class="input-logo" data-placeholder="&#xe80f;"></span>
-                  </div>
-        
-                  <div class="button-position m-t-32">
-                    <button type="submit" class="button-design">add</button>
-                  </div>
-                </form>
+               
                 </div>
               </div>
             </div>
@@ -159,9 +124,9 @@
       </footer>
     </div>
   
-    <script>
+    <script >
 
-//var axios = require("axios")
+
 var api = "http://localhost:7000/api/problem/";
     var table = document.getElementById("data");
     var table1 = document.getElementById("table1");
@@ -193,9 +158,13 @@ var api = "http://localhost:7000/api/problem/";
         row.children[4].innerHTML = `<button class="btn-remove" onclick="deleteProblem('${problems[rowNum-1]._id}','${rowNum-1}')">Delete</button>`
 
       }
+
+
+      //cancelling editing
+
       function cancelProblem(RowNum){
         console.log("canceled");
-        console.log(currentEditedRow ,table1.children[1].children[RowNum] )
+        console.log(currentEditedProb ,table1.children[1].children[RowNum] )
        const row =  table1.children[1].children[RowNum] 
         row.children[1].innerHTML = `<p>${ problems[RowNum-1].problem}</p>`;
         row.children[2].innerHTML = `<a href=${problems[RowNum-1]?.problemFile?.originalname} download>Download File</a>`
@@ -207,7 +176,7 @@ var api = "http://localhost:7000/api/problem/";
 
       }
       function getFileInput(e){
-        console.log(e.target.files[0] )
+    //     console.log(e.target.files[0] )
     //     var reader = new FileReader();
     // reader.readAsText(e.target.files[0], "UTF-8");
     // reader.onload = function (evt) {
@@ -218,7 +187,6 @@ var api = "http://localhost:7000/api/problem/";
   
   function editing(rowNum, dataId){
    
-console.log(arguments)
      
 
     const row =  table1.children[1].children[rowNum] ; 
@@ -247,9 +215,8 @@ console.log(arguments)
     .then(data => {
       console.log("data",data)
       problems.push(...data);
-      console.log(problems);
-  //    console.log(problems[1].problem);
- 
+      //    console.log(problems[1].problem);
+      
       for (var i = 0; i < problems.length; i++) {
         var row = table1.insertRow(-1); // -1 to append at end of table
         var cell1 = row.insertCell(0);
@@ -257,9 +224,14 @@ console.log(arguments)
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
+        console.log();
         cell1.innerHTML = i+1;
         cell2.innerHTML = `<p>${ problems[i].problem}</p>`;
-        cell3.innerHTML = `<a href=${problems[i]?.problemFile?.originalname} download>Download File</a>`
+
+        const relativePath = problems[i]?.problemFile?.path ; 
+        console.log(relativePath)
+        const root = "http://localhost:7000/public"
+        cell3.innerHTML = `<a href="${root}/${relativePath&&relativePath}"  >Download File</a>`
         //problems[i]?.problemFile?.filename;
         // cell4.innerHTML = `<button class="btn-edit" onclick="@location.href=http://localhost:7000/addProblem">Edit</button>`
         cell4.innerHTML = `<button class="btn-edit" onclick="editing('${i+1}','${problems[i]._id}')">Edit</button>`
@@ -350,28 +322,32 @@ console.log(response)
 
 
       function modifyProblem(id , problem , FileInput){
-        data.file= FileInput;
-        data.problem =problem
-        console.log(data)
-    const formData = new FormData();
-    formData.append('problem', problem);
-    formData.append('file', FileInput);
-
-   
-
-        fetch(`http://localhost:7000/api/problem/${id}`, {
-  method: 'POST',
-  body: formData}
+      
+        const formData = new FormData();
+        formData.append('problem', problem);
+        formData.append('file', FileInput);
+        
+  
+       console.log("file", FileInput);
+        var myHeaders = new Headers();
  
-).then(response=>{
 
-console.log(response)
-          return response.json();
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: formData,
+        };
 
-        }).then(data=>{
+        fetch(`http://localhost:7000/api/problem/${id}`, requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result);
+      
+          })
+          .catch((error) => {
+            console.log("error", error);
+          });
 
-          console.log(data)
-        })
       }
       
       </script>

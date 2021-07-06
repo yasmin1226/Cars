@@ -3,6 +3,7 @@ const router = express.Router();
 const Problem = require("../models/Problem");
 const multer = require("multer");
 
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
@@ -45,13 +46,13 @@ router.post("/", uploadStorage.single("file"), async (req, res) => {
     res.status(400).json({ err: err.message });
   }
 });
-router.post("/:id", async (req, res) => {
+router.post("/:id", uploadStorage.single("file"),async (req, res) => {
   try {
     const { problem } = req.body;
 
     const problemdata = {};
 
-    console.log("body is a ", req.body);
+    console.log("body is a ", req.body, req.file);
 
     if (problem) problemdata.problem = problem;
     if (req.file) problemdata.problemFile = req.file;
@@ -62,7 +63,7 @@ router.post("/:id", async (req, res) => {
         problemFile: req.file,
       }
     );
-
+    problemUpdate.save()
     if (!problemUpdate) {
       throw Error("that problem not exist");
     } else {

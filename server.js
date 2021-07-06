@@ -3,12 +3,19 @@ const dotenv = require("dotenv");
 const express = require("express");
 const path = require("path");
 var cors = require("cors");
-
+const multer = require("multer")
+const upload = multer();
 dotenv.config({ path: "./config.env" });
-const app = require("./app");
 var bodyParser = require("body-parser");
+const app = require("./app");
+app.use(express.json());
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(bodyParser.json({ limit: "50mb", extended: true }));
+app.use(upload.array());
+
+
 app.use("/public/uploads", express.static("uploads"));
-app.use("/public", express.static("public"));
+// app.use("/public", express.static("public"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 app.use((req, res, next) => {
@@ -27,8 +34,7 @@ app.use((req, res, next) => {
   }
   next();
 });
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-app.use(bodyParser.json({ limit: "50mb", extended: true }));
+
 
 const DB = process.env.DATABASE.replace(
   "<PASSWORD>",
