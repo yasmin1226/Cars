@@ -53,25 +53,20 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="active">
-            <a class="nav-link" href="./tables.html">
+            <a class="nav-link" href="/table">
               <i class="material-icons">content_paste</i>
               <p>Table List</p>
             </a>
           </li>
+         
           <li>
-            <a class="nav-link" href="./map.html">
-              <i class="material-icons">location_ons</i>
-              <p>Maps</p>
-            </a>
-          </li>
-          <li>
-            <a class="nav-link" href="./notifications.html">
+            <a class="nav-link" href="/notification" id="noti">
               <i class="material-icons">notifications</i>
               <p>Notifications</p>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="./user.html">
+            <a class="nav-link" href="/sendCode">
               <i class="material-icons">bubble_chart</i>
               <p>Send Code</p>
             </a>
@@ -261,27 +256,10 @@ var api = "http://localhost:7000/api/problem/";
       }
     });
 }
-    // refresh.addEventListener('click', () => {
-    //     table.innerHTML = '';
-    //     initialize();
-    // })
+    
 
 });
     
-//         var raw = "";
-
-// var requestOptions = {
-//   method: 'GET',
-//   body: raw,
-//   redirect: 'follow'
-// };
-// let problems;
-// fetch("localhost:7000/api/problem/", requestOptions)
-//   .then(response => response.text())
-//   .then(result => {console.log(result)
-//   problems=result.problems;
-//   })
-//   .catch(error => console.log('error', error));
 
     function addPrpoblem(){
       const raw={};

@@ -27,5 +27,11 @@ app.get("/table", (req, res) => {
 app.get("/addproblem", (req, res) => {
   res.render("addProblem");
 });
+app.get("/notification", (req,res)=>{
+  res.render("notifiction");
+})
+app.get("/sendcode", (req,res)=>{
+  res.render("sendCode");
+})
 
 module.exports = app;
