@@ -100,7 +100,7 @@
                   <p class="card-category"> Here is code of problem and solution</p>
                 </div>
                 <div class="card-body">
-                  <div class="table-responsive">
+                  <div class="table-responsive" >
                     <table class="table" id="table1">
                       <thead class=" text-primary">
                         <th>
@@ -120,15 +120,16 @@
                         </th>
                       </thead>
                       <tbody>
-<tr id="data">
+                         <tr id="data">
 
-</tr>
+                        </tr>
                       </tbody>
                     </table>
                     <!-- <button style=" margin-left: 400px; background-color: blue; color: cornsilk; border-radius: 10px; padding: 5px;">Add Problem</button> -->
-                    <div class="button-position m-t-32">
-                      <button type="submit" class="button-design">Add Problem</button>
+                    <div class="button-position m-t-32" id="table-form">
+                      <button type="submit" class="button-design" onclick="redirectForm()">Add Problem</button>
                     </div>
+                   
                   </div>
                
                 </div>
@@ -147,9 +148,17 @@
 var api = "http://localhost:7000/api/problem/";
     var table = document.getElementById("data");
     var table1 = document.getElementById("table1");
+    var from = document.getElementById("table-form");
     var problems = [];
     var currentEditedProb = {}
     console.log(table1);
+  
+      function redirectForm(){
+            window.location.href = "http://localhost:7000/addproblem";
+       }
+       function redirectTable(){
+            window.location.href = "http://localhost:7000/table";
+       }
 
       function saveProblem(rowNum ,dataId ){
         console.log("saved") ; 

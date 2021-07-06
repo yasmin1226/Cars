@@ -66,11 +66,17 @@
           <div class="button-position m-t-32">
             <button type="submit" class="button-design">add</button>
           </div>
+          <div class="button-position m-t-32" id="table-form">
+            <button  class="button-design" onclick="redirectTable()">Back</button>
+          </div>
         </form>
       </div>
     </div>
     <script>
       const form = document.getElementById("login-form");
+      function redirectTable(){
+            window.location.href = "http://localhost:7000/table";
+       }
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
