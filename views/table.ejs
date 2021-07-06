@@ -14,6 +14,20 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <!-- CSS Files -->
   <link href="/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <link
+  rel="stylesheet"
+  type="text/css"
+  href="login files/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+/>
+<!--erorr icons-->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="login files/fonts/Linearicons-Free-v1.0.0/icon-font.min.css"
+/>
+<link rel="stylesheet" type="text/css" href="login files/css/util.css" />
+<!--sizing-->
+<link rel="stylesheet" type="text/css" href="login files/css/main.css" />
   <style>
     body{
     /* background-color: rgb(20, 207, 20); */
@@ -111,7 +125,10 @@
 </tr>
                       </tbody>
                     </table>
-                    <button style=" margin-left: 400px; background-color: blue; color: cornsilk; border-radius: 10px; padding: 5px;">Add Problem</button>
+                    <!-- <button style=" margin-left: 400px; background-color: blue; color: cornsilk; border-radius: 10px; padding: 5px;">Add Problem</button> -->
+                    <div class="button-position m-t-32">
+                      <button type="submit" class="button-design">Add Problem</button>
+                    </div>
                   </div>
                
                 </div>
@@ -176,12 +193,7 @@ var api = "http://localhost:7000/api/problem/";
 
       }
       function getFileInput(e){
-    //     console.log(e.target.files[0] )
-    //     var reader = new FileReader();
-    // reader.readAsText(e.target.files[0], "UTF-8");
-    // reader.onload = function (evt) {
-    //   currentEditedProb.file = evt.target.result
-    // }
+  
     currentEditedProb.file = e.target.files[0]
       }
   

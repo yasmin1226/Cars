@@ -1,0 +1,35 @@
+customer :
+-enters the store
+-choose an item
+-go to the cashier to pay (cash || visa )
+-resrve a piece
+
+
+seller : 
+-help customer
+-login the system
+- search for piece
+
+
+cashier : 
+-calculate amount of money
+- register the customer(if new) || add amount (if old)
+**discount
+
+- select wich seller help customer **bonous**
+
+owner of the store : 
+-hire employee
+-fire employee
+-enter data
+-prepare the salary report
+report about the amount of selling for each employee, to get the 
+best one
+
+
+store manager :
+-decide percentage of sale 
+-generate reports
+- Send SMS when the sales begin to the  registered customer
+-. Can Sort the customer by their total buying amount and the 
+discount percentage of each one
