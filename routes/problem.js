@@ -28,7 +28,6 @@ router.get("/:id", async (req, res) => {
       throw Error("that problem not exist");
     } else {
       res.status(200).json(problem);
-      // res.render("EditProblem.ejs", { problem: problem });
     }
   } catch (err) {
     console.log("err", err);
@@ -46,16 +45,28 @@ router.post("/", uploadStorage.single("file"), async (req, res) => {
     res.status(400).json({ err: err.message });
   }
 });
-router.patch("/:id", async (req, res) => {
+router.post("/:id", async (req, res) => {
   try {
-    const problem = await Problem.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!problem) {
+    const { problem } = req.body;
+
+    const problemdata = {};
+
+    console.log("body is a ", req.body);
+
+    if (problem) problemdata.problem = problem;
+    if (req.file) problemdata.problemFile = req.file;
+    const problemUpdate = await Problem.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        problem: problem,
+        problemFile: req.file,
+      }
+    );
+
+    if (!problemUpdate) {
       throw Error("that problem not exist");
     } else {
-      res.status(200).json(problem);
+      res.status(200).json(problemUpdate);
     }
   } catch (err) {
     console.log(err);
